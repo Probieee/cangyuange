@@ -6,7 +6,7 @@
 
 <title>沧渊阁</title>
 
-<!-- 字体 -->
+<!-- 标题字体 -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
@@ -38,13 +38,13 @@ body::before{
     z-index:-2;
 }
 
-/* 颗粒动态 */
+/* 颗粒 */
 body::after{
     content:"";
     position:fixed;
     inset:0;
     background:url("https://grainy-gradients.vercel.app/noise.svg");
-    opacity:0.15;
+    opacity:0.12;
     animation:grain 8s infinite;
     z-index:-1;
 }
@@ -78,7 +78,7 @@ h1{
 #countdown{
     text-align:center;
     margin-top:20px;
-    font-size:26px;
+    font-size:28px;
     color:#38bdf8;
 }
 
@@ -86,29 +86,40 @@ h1{
 .section-title{
     text-align:center;
     margin-top:40px;
-    font-size:30px;
+    font-size:32px;
     color:#e2e8f0;
 }
 
-/* 卡片 */
+/* 卡片容器 */
 .timeline{
     width:800px;
     margin:40px auto;
 }
 
-/* 项目 */
+/* 卡片 */
 .item{
-    background:rgba(255,255,255,0.05);
-    padding:22px;
-    margin:15px 0;
+    background:rgba(15,23,42,0.6);
+    backdrop-filter:blur(10px);
+    padding:24px;
+    margin:18px 0;
     border-radius:14px;
     display:flex;
     justify-content:space-between;
-    font-size:22px;
+    font-size:24px;
     transition:0.3s;
 }
 
-/* 高亮 */
+/* 文字颜色（关键修复） */
+.item div:first-child{
+    color:#38bdf8;
+    font-weight:600;
+}
+
+.item div:last-child{
+    color:#93c5fd;
+}
+
+/* 当前高亮 */
 .active{
     border:1px solid #38bdf8;
     box-shadow:0 0 25px #38bdf8;
@@ -122,7 +133,7 @@ h1{
     top:50%;
     transform:translateY(-50%);
     writing-mode:vertical-rl;
-    font-size:38px;
+    font-size:42px;
     color:#38bdf8;
 }
 
@@ -132,22 +143,22 @@ h1{
     top:50%;
     transform:translateY(-50%);
     writing-mode:vertical-rl;
-    font-size:22px;
+    font-size:24px;
     color:#38bdf8;
 }
 
 /* 按钮 */
 .btn{
     display:block;
-    width:220px;
+    width:240px;
     margin:40px auto;
     text-align:center;
-    padding:14px;
+    padding:16px;
     border-radius:30px;
     background:linear-gradient(90deg,#2563eb,#38bdf8);
     color:white;
     text-decoration:none;
-    font-size:18px;
+    font-size:20px;
 }
 
 /* 页脚 */
@@ -181,22 +192,22 @@ footer{
 
 <script>
 const events = [
-{ name:"百業派對", days:[0,1,2,3,4,5,6], start:23*60, text:"每晚 23:00" },
+{ name:"百業派對", days:[0,1,2,3,4,5,6], start:23*60, duration:60, text:"每晚 23:00" },
 
-{ name:"百業副本", days:[1,3,5], start:21*60, text:"周一/三/五 21:00-21:30" },
+{ name:"百業副本", days:[1,3,5], start:21*60, duration:30, text:"周一/三/五 21:00-21:30" },
 
-{ name:"百葉戰爭", days:[0,6], start:22*60, text:"周六/周日 22:00-23:00（联赛周六20:30）" },
+{ name:"百葉戰爭", days:[0,6], start:22*60, duration:60, text:"周六/周日 22:00-23:00（联赛周六20:30）" },
 
-{ name:"一決高下", days:[2,4], start:21*60, text:"周二/周四 21:00-22:00" },
+{ name:"一決高下", days:[2,4], start:21*60, duration:60, text:"周二/周四 21:00-22:00" },
 
-{ name:"破軍殺將", days:[2,4], start:22*60, text:"周二/周四 22:00-23:00" }
+{ name:"破軍殺將", days:[2,4], start:22*60, duration:60, text:"周二/周四 22:00-23:00" }
 ];
 
 function getNow(){
-    const now=new Date();
+    const n=new Date();
     return {
-        day:now.getDay(),
-        time:now.getHours()*60+now.getMinutes()
+        day:n.getDay(),
+        time:n.getHours()*60+n.getMinutes()
     };
 }
 
@@ -233,7 +244,7 @@ function render(){
         let active=false;
 
         if(e.days.includes(now.day)){
-            if(now.time>=e.start && now.time<=e.start+60){
+            if(now.time>=e.start && now.time<=e.start+e.duration){
                 active=true;
             }
         }
