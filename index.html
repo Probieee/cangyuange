@@ -2,7 +2,11 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>沧渊阁 · 百业网</title>
+
+<!-- 字体 -->
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -10,178 +14,87 @@
 body{
     font-family:"Microsoft YaHei",sans-serif;
     color:white;
-    background:#020617;
+    text-align:center;
+    overflow-x:hidden;
 }
 
-/* ✅ 背景（用 logo.png） */
+/* 背景（用 logo.png） */
 body::before{
-    content:'';
+    content:"";
     position:fixed;
     width:100%;
     height:100%;
     background:
-    linear-gradient(rgba(2,6,23,0.7),rgba(2,6,23,0.9)),
-    url('logo.png');
+    linear-gradient(rgba(2,6,23,0.85),rgba(2,6,23,0.95)),
+    url("logo.png");
     background-size:cover;
     background-position:center;
     z-index:-1;
 }
 
-/* 左侧大字 */
-.left-title{
-    position:fixed;
-    left:40px;
-    top:120px;
-    writing-mode:vertical-rl;
-    font-size:48px;
-    color:#38bdf8;
-    letter-spacing:6px;
-    opacity:0.8;
-}
-
-/* 左下说明 */
-.left-box{
-    position:fixed;
-    left:40px;
-    bottom:120px;
-    color:#7dd3fc;
-}
-
-.left-box div{
-    margin:15px 0;
-}
-
-/* 右侧文字 */
-.right-text{
-    position:fixed;
-    right:40px;
-    top:200px;
-    writing-mode:vertical-rl;
-    color:#7dd3fc;
-    letter-spacing:4px;
-}
-
-/* 主体 */
-.hero{
-    text-align:center;
-    padding-top:80px;
-}
-
+/* 标题 */
 h1{
-    font-size:72px;
-    background:linear-gradient(90deg,#60a5fa,#22d3ee);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-
-#countdown{
-    margin-top:10px;
-    font-size:22px;
+    font-family:'Ma Shan Zheng',cursive;
+    font-size:80px;
+    margin-top:40px;
     color:#38bdf8;
+    text-shadow:
+        0 0 10px #22d3ee,
+        0 0 30px #22d3ee,
+        0 0 60px #0ea5e9;
 }
 
-/* 时间轴框 */
+/* 副信息 */
+p{
+    margin-top:10px;
+    color:#94a3b8;
+}
+
+/* 倒计时 */
+#countdown{
+    margin-top:15px;
+    font-size:20px;
+    color:#22d3ee;
+}
+
+/* 时间轴 */
 .timeline{
-    width:820px;
-    margin:40px auto;
-    padding:30px;
-    border-radius:15px;
-    background:rgba(10,20,40,0.75);
-    backdrop-filter:blur(10px);
-    position:relative;
+    margin:50px auto;
+    width:90%;
+    max-width:700px;
 }
 
-/* 中线 */
-.line{
-    position:absolute;
-    left:35%;
-    top:40px;
-    bottom:40px;
-    width:2px;
-    background:#22d3ee;
-}
-
-/* item */
 .item{
     display:flex;
+    justify-content:space-between;
     align-items:center;
-    margin:25px 0;
+    padding:15px 20px;
+    margin:10px 0;
+    border-radius:10px;
+    background:rgba(255,255,255,0.05);
     transition:0.3s;
 }
 
-/* 时间 */
-.time{
-    width:30%;
-    text-align:right;
-    padding-right:20px;
-    color:#38bdf8;
-    font-size:18px;
-}
-
-/* 节点 */
-.dot{
-    width:12px;
-    height:12px;
-    background:#22d3ee;
-    border-radius:50%;
-    margin:0 15px;
-}
-
-/* 内容 */
-.content{
-    flex:1;
-    padding:15px 20px;
-    background:rgba(15,23,42,0.6);
-    border-radius:10px;
-    display:flex;
-    justify-content:space-between;
-    font-size:18px;
-}
-
-/* 🔥 当前活动 */
+/* 当前活动高亮 */
 .active{
-    transform:scale(1.08);
-}
-
-.active .content{
-    border:2px solid #22d3ee;
-    box-shadow:0 0 30px #22d3ee;
-    background:rgba(15,23,42,0.9);
-    font-size:20px;
-}
-
-/* 🔥 左侧“进行中 >>” */
-.now{
-    position:absolute;
-    left:-150px;
-    color:#22d3ee;
-    font-size:22px;
-    font-weight:bold;
+    background:rgba(56,189,248,0.2);
+    box-shadow:0 0 20px #22d3ee;
+    transform:scale(1.05);
 }
 
 /* 按钮 */
 .btn{
-    display:block;
-    width:240px;
-    margin:50px auto;
-    padding:15px;
-    text-align:center;
+    display:inline-block;
+    margin:40px auto;
+    padding:12px 30px;
     border-radius:30px;
-    background:linear-gradient(135deg,#3b82f6,#22d3ee);
+    background:linear-gradient(90deg,#3b82f6,#22d3ee);
     color:white;
     text-decoration:none;
-    font-size:18px;
-    box-shadow:0 0 20px rgba(34,211,238,0.5);
-    transition:0.3s;
-}
-
-.btn:hover{
-    transform:scale(1.08);
 }
 
 /* 页脚 */
 footer{
-    text-align:center;
     margin:30px;
     color:#94a3b8;
 }
@@ -190,100 +103,97 @@ footer{
 
 <body>
 
-<!-- 左 -->
-<div class="left-title">沧渊阁</div>
-
-<div class="left-box">
-<div>⚔ 百业齐聚</div>
-<div>👥 兄弟集结</div>
-<div>👑 沧渊为王</div>
-</div>
-
-<!-- 右 -->
-<div class="right-text">
-兄弟集结 共闯江湖 永不独行 沧渊为王
-</div>
-
-<!-- 主体 -->
-<section class="hero">
 <h1>沧渊阁</h1>
 <p>ID: 10260103</p>
 <div id="countdown">加载中...</div>
-</section>
 
-<h2 style="text-align:center;">百業活動時間表</h2>
-
+<!-- 时间轴 -->
 <div class="timeline">
 
-<div class="line"></div>
-
-<div class="item" data-start="23:00" data-end="23:59" data-days="all">
-<div class="time">每日 23:00</div>
-<div class="dot"></div>
-<div class="content">
-<span>🎉 百業派對</span>
-<span>23:00-23:59</span>
-</div>
+<div class="item" id="e1">
+<span>🎉 百业派对</span>
+<span>每日 23:00</span>
 </div>
 
-<div class="item" data-start="21:30" data-end="23:00" data-days="1,3,5">
-<div class="time">一 / 三 / 五</div>
-<div class="dot"></div>
-<div class="content">
-<span>⚔ 百業副本</span>
-<span>21:30-23:00</span>
-</div>
+<div class="item" id="e2">
+<span>⚔ 百业副本</span>
+<span>一/三/五 21:30</span>
 </div>
 
-<div class="item" data-start="22:00" data-end="23:00" data-days="6,0">
-<div class="time">周末</div>
-<div class="dot"></div>
-<div class="content">
-<span>🔥 百葉戰爭</span>
-<span>22:00-23:00</span>
-</div>
+<div class="item" id="e3">
+<span>🔥 百业战争</span>
+<span>周末 22:00</span>
 </div>
 
-<div class="item active" data-start="21:00" data-end="22:00" data-days="2,4">
-<div class="time">周二 / 周四</div>
-<div class="dot"></div>
-<div class="content">
-<span>🏆 一決高下</span>
-<span>21:00-22:00</span>
-</div>
-<div class="now">周二 / 周四 >></div>
+<div class="item" id="e4">
+<span>🏆 一决高下</span>
+<span>周二/四 21:00</span>
 </div>
 
-<div class="item" data-start="22:00" data-end="23:00" data-days="2,4">
-<div class="time">周二 / 周四</div>
-<div class="dot"></div>
-<div class="content">
-<span>⚡ 破軍殺將</span>
-<span>22:00-23:00</span>
-</div>
+<div class="item" id="e5">
+<span>⚡ 破军杀将</span>
+<span>周二/四 22:00</span>
 </div>
 
 </div>
 
-<a href="https://discord.gg/cangyuancrew" target="_blank" class="btn">
-🚀 加入 Discord
-</a>
+<a href="https://discord.gg/cangyuancrew" target="_blank" class="btn">🚀 加入 Discord</a>
 
-<footer>
-© 2026 沧渊阁 · Probieee
-</footer>
+<footer>© 2026 沧渊阁 · Probieee</footer>
 
 <script>
-function pad(n){return n.toString().padStart(2,"0");}
+function getNextEvent(){
+    const now = new Date();
+    const day = now.getDay();
+    const time = now.getHours()*60 + now.getMinutes();
+
+    const events = [
+        {name:"百业派对",days:"all",start:1380,id:"e1"}, //23:00
+        {name:"百业副本",days:[1,3,5],start:1290,id:"e2"}, //21:30
+        {name:"百业战争",days:[6,0],start:1320,id:"e3"}, //22:00
+        {name:"一决高下",days:[2,4],start:1260,id:"e4"}, //21:00
+        {name:"破军杀将",days:[2,4],start:1320,id:"e5"} //22:00
+    ];
+
+    let next=null;
+    let min=999999;
+
+    events.forEach(e=>{
+        let days = e.days==="all" ? [0,1,2,3,4,5,6] : e.days;
+
+        days.forEach(d=>{
+            let diffDay = (d-day+7)%7;
+            let diffTime = diffDay*1440 + e.start - time;
+
+            if(diffTime>=0 && diffTime<min){
+                min = diffTime;
+                next = e;
+            }
+        });
+    });
+
+    return {event:next,minutes:min};
+}
 
 function update(){
-    const now=new Date();
-    const h=pad(now.getHours());
-    const m=pad(now.getMinutes());
-    const s=pad(now.getSeconds());
+    const data = getNextEvent();
 
-    document.getElementById("countdown").innerText=
-    "当前时间："+h+":"+m+":"+s;
+    if(!data.event){
+        document.getElementById("countdown").innerText="加载中...";
+        return;
+    }
+
+    const h = Math.floor(data.minutes/60);
+    const m = data.minutes%60;
+
+    document.getElementById("countdown").innerText =
+    "下一场：" + data.event.name + "（"+h+"小时 "+m+"分钟）";
+
+    // 清除高亮
+    document.querySelectorAll(".item").forEach(i=>i.classList.remove("active"));
+
+    // 高亮当前
+    document.getElementById(data.event.id).classList.add("active");
 }
 
 setInterval(update,1000);
