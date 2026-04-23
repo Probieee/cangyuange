@@ -6,15 +6,10 @@
 
 <title>沧渊阁</title>
 
-<!-- 标题字体 -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 html,body{
     height:100%;
@@ -26,15 +21,11 @@ body::before{
     content:"";
     position:fixed;
     inset:0;
-
     background:
     linear-gradient(rgba(2,6,23,0.55),rgba(2,6,23,0.75)),
     url("bg.jpg");
-
     background-size:cover;
     background-position:center;
-    background-repeat:no-repeat;
-
     z-index:-2;
 }
 
@@ -48,12 +39,9 @@ body::after{
     animation:grain 8s infinite;
     z-index:-1;
 }
-
 @keyframes grain{
     0%{transform:translate(0,0)}
-    25%{transform:translate(-5%,5%)}
-    50%{transform:translate(5%,-5%)}
-    75%{transform:translate(-3%,3%)}
+    50%{transform:translate(-5%,5%)}
     100%{transform:translate(0,0)}
 }
 
@@ -61,7 +49,7 @@ body::after{
 h1{
     font-family:'Noto Serif SC', serif;
     font-size:90px;
-    color:#1e3a8a; /* 深蓝 */
+    color:#1e3a8a;
     text-align:center;
     margin-top:60px;
 }
@@ -90,13 +78,12 @@ h1{
     color:#e2e8f0;
 }
 
-/* 卡片容器 */
+/* 卡片 */
 .timeline{
     width:800px;
     margin:40px auto;
 }
 
-/* 卡片 */
 .item{
     background:rgba(15,23,42,0.6);
     backdrop-filter:blur(10px);
@@ -109,17 +96,26 @@ h1{
     transition:0.3s;
 }
 
-/* 文字颜色（关键修复） */
-.item div:first-child{
+/* 左侧 */
+.left{
+    display:flex;
+    align-items:center;
+    gap:12px;
     color:#38bdf8;
     font-weight:600;
 }
 
-.item div:last-child{
+/* 右侧 */
+.right{
     color:#93c5fd;
 }
 
-/* 当前高亮 */
+/* 图标 */
+.icon{
+    font-size:22px;
+}
+
+/* 高亮 */
 .active{
     border:1px solid #38bdf8;
     box-shadow:0 0 25px #38bdf8;
@@ -149,10 +145,12 @@ h1{
 
 /* 按钮 */
 .btn{
-    display:block;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
     width:240px;
     margin:40px auto;
-    text-align:center;
     padding:16px;
     border-radius:30px;
     background:linear-gradient(90deg,#2563eb,#38bdf8);
@@ -161,7 +159,6 @@ h1{
     font-size:20px;
 }
 
-/* 页脚 */
 footer{
     text-align:center;
     color:#94a3b8;
@@ -185,78 +182,77 @@ footer{
 <div class="timeline" id="timeline"></div>
 
 <a class="btn" href="#">
-🎮 加入 Discord
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" viewBox="0 0 16 16">
+<path d="M13.545 2.907a13.227 13.227 0 0 0-3.167-.981.05.05 0 0 0-.053.025c-.137.25-.289.577-.396.837a12.19 12.19 0 0 0-3.858 0 8.404 8.404 0 0 0-.401-.837.05.05 0 0 0-.053-.025 13.19 13.19 0 0 0-3.167.981.041.041 0 0 0-.019.019C.533 6.007-.32 9.057.099 12.07a.043.043 0 0 0 .016.03 13.344 13.344 0 0 0 4.077 2.07.05.05 0 0 0 .055-.019c.314-.43.593-.885.83-1.36a.05.05 0 0 0-.028-.069 8.765 8.765 0 0 1-1.248-.595.05.05 0 0 1-.005-.084c.084-.063.168-.129.248-.195a.05.05 0 0 1 .052-.007c2.619 1.197 5.457 1.197 8.044 0a.05.05 0 0 1 .053.006c.08.066.164.132.248.195a.05.05 0 0 1-.004.084 8.69 8.69 0 0 1-1.249.596.05.05 0 0 0-.027.068c.24.475.519.93.829 1.36a.05.05 0 0 0 .056.019 13.31 13.31 0 0 0 4.077-2.07.05.05 0 0 0 .016-.03c.5-3.177-.838-6.202-2.354-9.145a.041.041 0 0 0-.019-.019z"/>
+</svg>
+加入 Discord
 </a>
 
 <footer>© 2026 沧渊阁 · Probieee</footer>
 
 <script>
-const events = [
-{ name:"百業派對", days:[0,1,2,3,4,5,6], start:23*60, duration:60, text:"每晚 23:00" },
+function getIcon(name){
+    if(name.includes("派")) return "🎉";
+    if(name.includes("副")) return "⚔️";
+    if(name.includes("戰")) return "🔥";
+    if(name.includes("決")) return "🏆";
+    if(name.includes("破")) return "⚡";
+    return "📌";
+}
 
-{ name:"百業副本", days:[1,3,5], start:21*60, duration:30, text:"周一/三/五 21:00-21:30" },
-
-{ name:"百葉戰爭", days:[0,6], start:22*60, duration:60, text:"周六/周日 22:00-23:00（联赛周六20:30）" },
-
-{ name:"一決高下", days:[2,4], start:21*60, duration:60, text:"周二/周四 21:00-22:00" },
-
-{ name:"破軍殺將", days:[2,4], start:22*60, duration:60, text:"周二/周四 22:00-23:00" }
+const events=[
+{name:"百業派對",days:[0,1,2,3,4,5,6],start:1380,duration:60,text:"每晚 23:00"},
+{name:"百業副本",days:[1,3,5],start:1260,duration:30,text:"周一/三/五 21:00-21:30"},
+{name:"百葉戰爭",days:[0,6],start:1320,duration:60,text:"周六/周日 22:00-23:00（联赛周六20:30）"},
+{name:"一決高下",days:[2,4],start:1260,duration:60,text:"周二/周四 21:00-22:00"},
+{name:"破軍殺將",days:[2,4],start:1320,duration:60,text:"周二/周四 22:00-23:00"}
 ];
 
 function getNow(){
     const n=new Date();
-    return {
-        day:n.getDay(),
-        time:n.getHours()*60+n.getMinutes()
-    };
+    return{day:n.getDay(),time:n.getHours()*60+n.getMinutes()};
 }
 
-function getNextEvent(){
+function getNext(){
     const now=getNow();
-    let min=999999;
-    let next=null;
+    let min=999999,next=null;
 
     events.forEach(e=>{
         e.days.forEach(d=>{
             let diff=(d-now.day+7)%7;
             let t=diff*1440+e.start-now.time;
-
-            if(diff===0 && e.start<=now.time){
-                t+=7*1440;
-            }
-
-            if(t<min){
-                min=t;
-                next=e;
-            }
+            if(diff===0&&e.start<=now.time)t+=10080;
+            if(t<min){min=t;next=e;}
         });
     });
 
-    return {event:next,minutes:min};
+    return{event:next,minutes:min};
 }
 
 function render(){
     const now=getNow();
-    const wrap=document.getElementById("timeline");
-    wrap.innerHTML="";
+    const box=document.getElementById("timeline");
+    box.innerHTML="";
 
     events.forEach(e=>{
         let active=false;
-
         if(e.days.includes(now.day)){
-            if(now.time>=e.start && now.time<=e.start+e.duration){
+            if(now.time>=e.start&&now.time<=e.start+e.duration){
                 active=true;
             }
         }
 
-        wrap.innerHTML+=`
+        box.innerHTML+=`
         <div class="item ${active?"active":""}">
-            <div>${e.name}</div>
-            <div>${e.text}</div>
+            <div class="left">
+                <span class="icon">${getIcon(e.name)}</span>
+                ${e.name}
+            </div>
+            <div class="right">${e.text}</div>
         </div>`;
     });
 
-    const next=getNextEvent();
+    const next=getNext();
     const h=Math.floor(next.minutes/60);
     const m=next.minutes%60;
 
