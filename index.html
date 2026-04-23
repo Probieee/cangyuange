@@ -6,203 +6,218 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-html,body{height:100%;}
+
 body{
     font-family:"Microsoft YaHei",sans-serif;
     color:white;
-    overflow-x:hidden;
     background:#020617;
 }
 
-/* 🌌 多层背景（视差感） */
-.bg{
+/* 背景 */
+body::before{
+    content:'';
     position:fixed;
-    inset:0;
-    z-index:-3;
-    overflow:hidden;
-}
-
-/* 主图层（你的 logo.png 做背景） */
-.bg-main{
-    position:absolute;
-    inset:-5%;
+    width:100%;
+    height:100%;
     background:
-      radial-gradient(ellipse at center, rgba(0,0,0,0.2), rgba(0,0,0,0.8)),
-      url('logo.png') center/cover no-repeat;
-    filter:brightness(0.9) saturate(1.1);
-    animation: slowZoom 30s ease-in-out infinite alternate;
+    linear-gradient(rgba(2,6,23,0.85),rgba(2,6,23,0.95)),
+    url('logo.png');
+    background-size:cover;
+    background-position:center;
+    z-index:-1;
 }
 
-/* 光晕层 */
-.bg-glow{
-    position:absolute;
-    inset:0;
-    background:
-      radial-gradient(circle at 50% 40%, rgba(34,211,238,0.25), transparent 40%),
-      radial-gradient(circle at 50% 60%, rgba(59,130,246,0.2), transparent 45%);
-    mix-blend-mode:screen;
-    animation: pulse 6s ease-in-out infinite;
-}
-
-/* 细颗粒层 */
-.bg-noise{
-    position:absolute;
-    inset:0;
-    opacity:.05;
-    background-image:url('https://grainy-gradients.vercel.app/noise.svg');
-}
-
-/* 动画 */
-@keyframes slowZoom{
-    from{ transform:scale(1); }
-    to{ transform:scale(1.1); }
-}
-@keyframes pulse{
-    0%,100%{ opacity:.6; }
-    50%{ opacity:1; }
-}
-
-/* 首页（开场） */
+/* 首页 */
 .hero{
     height:100vh;
     display:flex;
-    flex-direction:column;
     justify-content:center;
     align-items:center;
-    text-align:center;
+    flex-direction:column;
 }
 
-/* 标题 */
 h1{
-    font-size:88px;
-    letter-spacing:6px;
-    background:linear-gradient(90deg,#60a5fa,#22d3ee,#a5f3fc);
+    font-size:80px;
+    background:linear-gradient(90deg,#60a5fa,#22d3ee);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
-    text-shadow:0 0 40px rgba(34,211,238,.8);
 }
 
-/* 副标题 */
 .hero p{
-    margin-top:12px;
     color:#94a3b8;
-    letter-spacing:2px;
 }
 
-/* 向下提示 */
-.scroll-tip{
-    position:absolute;
-    bottom:30px;
-    font-size:14px;
-    color:#94a3b8;
-    opacity:.8;
-    animation: float 2s ease-in-out infinite;
-}
-@keyframes float{
-    0%,100%{ transform:translateY(0); }
-    50%{ transform:translateY(10px); }
-}
-
-/* 内容区 */
-section{
-    padding:100px 20px;
-    text-align:center;
-}
-
-/* 标题 */
-h2{
-    font-size:36px;
-    margin-bottom:40px;
+/* 倒计时 */
+#countdown{
+    margin-top:20px;
+    font-size:22px;
     color:#38bdf8;
 }
 
-/* 卡片 */
-.grid{
+/* 时间轴 */
+.timeline{
+    max-width:900px;
+    margin:60px auto;
+    position:relative;
+}
+
+.timeline::before{
+    content:'';
+    position:absolute;
+    left:50%;
+    width:2px;
+    height:100%;
+    background:#22d3ee;
+    transform:translateX(-50%);
+}
+
+.item{
     display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
+    justify-content:space-between;
+    margin:40px 0;
 }
 
-.card{
-    background:rgba(15,23,42,0.65);
-    backdrop-filter:blur(12px);
-    margin:15px;
-    padding:25px;
-    width:280px;
-    border-radius:16px;
-    border:1px solid rgba(56,189,248,0.2);
-    transition:.4s;
+.time{
+    width:45%;
+    text-align:right;
+    color:#38bdf8;
 }
 
-.card:hover{
-    transform:translateY(-10px) scale(1.05);
-    box-shadow:0 0 30px rgba(34,211,238,.7);
+.content{
+    width:45%;
+    padding:20px;
+    background:rgba(15,23,42,0.7);
+    border-radius:10px;
+}
+
+/* 当前活动 */
+.active .content{
+    border:2px solid #22d3ee;
+    box-shadow:0 0 25px #22d3ee;
 }
 
 /* 按钮 */
 .btn{
-    display:inline-block;
-    margin-top:40px;
-    padding:16px 46px;
-    border-radius:12px;
-    background:linear-gradient(135deg,#3b82f6,#22d3ee);
-    text-decoration:none;
+    display:block;
+    margin:60px auto;
+    padding:15px 40px;
+    background:#22d3ee;
     color:white;
-    font-size:18px;
-    transition:.3s;
-}
-.btn:hover{
-    transform:scale(1.12);
-    box-shadow:0 0 35px rgba(34,211,238,.9);
+    text-decoration:none;
+    width:max-content;
 }
 
-/* 页脚 */
 footer{
-    padding:40px;
     text-align:center;
-    color:#64748b;
+    padding:30px;
 }
 </style>
+
 </head>
 
 <body>
 
-<!-- 🌌 背景 -->
-<div class="bg">
-    <div class="bg-main"></div>
-    <div class="bg-glow"></div>
-    <div class="bg-noise"></div>
-</div>
-
-<!-- 🐉 开场 -->
 <section class="hero">
-    <h1>沧渊阁</h1>
-    <p>ID: 10260103</p>
-    <div class="scroll-tip">▼ 向下滑动 ▼</div>
+<h1>沧渊阁</h1>
+<p>ID: 10260103</p>
+
+<!-- 倒计时 -->
+<div id="countdown">加载中...</div>
+
 </section>
 
-<!-- 📊 活动 -->
-<section>
-<h2>百業活動時間表</h2>
+<h2 style="text-align:center;">百業活動時間表</h2>
 
-<div class="grid">
-<div class="card">🎉 百業派對<br>每晚 23:00</div>
-<div class="card">⚔ 副本<br>一/三/五 21:30</div>
-<div class="card">🔥 百葉戰爭<br>周末 22:00</div>
-<div class="card">🏆 一決高下<br>周二/四 21:00</div>
-<div class="card">⚡ 破軍殺將<br>周二/四 22:00</div>
+<div class="timeline">
+
+<div class="item" data-start="23:00" data-end="23:59" data-days="all" data-name="百業派對">
+<div class="time">每日 23:00</div>
+<div class="content">🎉 百業派對</div>
 </div>
 
-<!-- 🔗 加入 -->
-<a href="https://discord.gg/cangyuancrew" target="_blank" class="btn">
-🚀 加入 Discord
-</a>
+<div class="item" data-start="21:30" data-end="23:00" data-days="1,3,5" data-name="副本">
+<div class="time">一 / 三 / 五</div>
+<div class="content">⚔ 百業 / 俠境副本</div>
+</div>
 
-</section>
+<div class="item" data-start="22:00" data-end="23:00" data-days="6,0" data-name="百葉戰爭">
+<div class="time">周末</div>
+<div class="content">🔥 百葉戰爭</div>
+</div>
+
+<div class="item" data-start="21:00" data-end="22:00" data-days="2,4" data-name="一決高下">
+<div class="time">周二 / 周四</div>
+<div class="content">🏆 一決高下</div>
+</div>
+
+<div class="item" data-start="22:00" data-end="23:00" data-days="2,4" data-name="破軍殺將">
+<div class="time">周二 / 周四</div>
+<div class="content">⚡ 破軍殺將</div>
+</div>
+
+</div>
+
+<a href="https://discord.gg/cangyuancrew" target="_blank" class="btn">
+加入 Discord
+</a>
 
 <footer>
 © 2026 沧渊阁 · Probieee
 </footer>
+
+<script>
+function getNextEvent(){
+    const now = new Date();
+    const currentDay = now.getDay();
+    const currentTime = now.getHours()*60 + now.getMinutes();
+
+    let nextEvent = null;
+    let minDiff = Infinity;
+
+    document.querySelectorAll(".item").forEach(item=>{
+        const days = item.dataset.days;
+        const start = item.dataset.start;
+        const name = item.dataset.name;
+
+        const [sh, sm] = start.split(":").map(Number);
+        const startTime = sh*60 + sm;
+
+        let validDays = [];
+
+        if(days === "all"){
+            validDays = [0,1,2,3,4,5,6];
+        }else{
+            validDays = days.split(",").map(Number);
+        }
+
+        validDays.forEach(day=>{
+            let diffDay = (day - currentDay + 7) % 7;
+            let diffTime = diffDay*1440 + startTime - currentTime;
+
+            if(diffTime < 0) diffTime += 7*1440;
+
+            if(diffTime < minDiff){
+                minDiff = diffTime;
+                nextEvent = name;
+            }
+        });
+    });
+
+    return {name: nextEvent, minutes: minDiff};
+}
+
+function updateCountdown(){
+    const data = getNextEvent();
+    const h = Math.floor(data.minutes/60);
+    const m = data.minutes%60;
+
+    document.getElementById("countdown").innerText =
+    "下一场："+data.name+"（"+h+"小时 "+m+"分钟）";
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+</script>
 
 </body>
 </html>
