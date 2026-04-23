@@ -18,18 +18,30 @@ body{
     overflow-x:hidden;
 }
 
-/* 背景（用 logo.png） */
+/* 背景（唯一正确写法） */
 body::before{
     content:"";
     position:fixed;
+    top:0;
+    left:0;
     width:100%;
     height:100%;
+
     background:
     linear-gradient(rgba(2,6,23,0.85),rgba(2,6,23,0.95)),
     url("logo.png");
+
     background-size:cover;
     background-position:center;
+    background-repeat:no-repeat;
+
     z-index:-1;
+}
+
+/* 防白边 */
+body{
+    margin:0;
+    background:black;
 }
 
 /* 标题 */
