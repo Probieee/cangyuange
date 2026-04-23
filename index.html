@@ -20,85 +20,122 @@ body::before{
     width:100%;
     height:100%;
     background:
-    linear-gradient(rgba(2,6,23,0.85),rgba(2,6,23,0.95)),
-    url('logo.png');
+    linear-gradient(rgba(2,6,23,0.7),rgba(2,6,23,0.9)),
+    url('bg.jpg');
     background-size:cover;
     background-position:center;
     z-index:-1;
 }
 
-/* 左右装饰 */
-.side{
+/* 左侧大字 */
+.left-title{
     position:fixed;
-    top:0;
-    width:220px;
-    height:100%;
-    padding:40px 20px;
+    left:40px;
+    top:120px;
+    writing-mode:vertical-rl;
+    font-size:48px;
+    color:#38bdf8;
+    letter-spacing:6px;
+    opacity:0.8;
+}
+
+/* 左下说明 */
+.left-box{
+    position:fixed;
+    left:40px;
+    bottom:120px;
     color:#7dd3fc;
-    opacity:0.7;
 }
 
-.left{left:0;}
-.right{right:0;text-align:right;}
-
-.side h3{
-    margin-bottom:20px;
-    font-size:18px;
-}
-
-.side p{
+.left-box div{
     margin:15px 0;
-    font-size:14px;
+}
+
+/* 右侧文字 */
+.right-text{
+    position:fixed;
+    right:40px;
+    top:200px;
+    writing-mode:vertical-rl;
+    color:#7dd3fc;
+    letter-spacing:4px;
 }
 
 /* 主体 */
 .hero{
-    padding:120px 20px 40px;
     text-align:center;
+    padding-top:80px;
 }
 
 h1{
-    font-size:70px;
+    font-size:72px;
     background:linear-gradient(90deg,#60a5fa,#22d3ee);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
 
 #countdown{
-    font-size:26px;
     margin-top:10px;
+    font-size:22px;
     color:#38bdf8;
 }
 
-/* 时间轴 */
+/* 时间轴框 */
 .timeline{
-    max-width:800px;
+    width:800px;
     margin:40px auto;
+    padding:30px;
+    border-radius:15px;
+    background:rgba(10,20,40,0.7);
+    backdrop-filter:blur(10px);
+    position:relative;
 }
 
+/* 中线 */
+.line{
+    position:absolute;
+    left:35%;
+    top:40px;
+    bottom:40px;
+    width:2px;
+    background:#22d3ee;
+}
+
+/* item */
 .item{
     display:flex;
-    justify-content:space-between;
+    align-items:center;
     margin:25px 0;
-    transition:0.3s;
 }
 
+/* 时间 */
 .time{
-    width:40%;
+    width:30%;
     text-align:right;
-    font-size:18px;
+    padding-right:20px;
     color:#38bdf8;
 }
 
-.content{
-    width:55%;
-    padding:18px;
-    background:rgba(15,23,42,0.6);
-    border-radius:10px;
-    font-size:18px;
+/* 节点 */
+.dot{
+    width:12px;
+    height:12px;
+    background:#22d3ee;
+    border-radius:50%;
+    margin:0 15px;
 }
 
-/* 🔥 当前活动放大 */
+/* 内容 */
+.content{
+    flex:1;
+    padding:15px 20px;
+    background:rgba(15,23,42,0.6);
+    border-radius:10px;
+    display:flex;
+    justify-content:space-between;
+}
+
+/* 当前活动 */
 .active{
     transform:scale(1.08);
 }
@@ -106,151 +143,129 @@ h1{
 .active .content{
     border:2px solid #22d3ee;
     box-shadow:0 0 30px #22d3ee;
-    font-size:20px;
+}
+
+/* 进行中 */
+.now{
+    position:absolute;
+    left:-140px;
+    color:#22d3ee;
+    font-size:22px;
 }
 
 /* 按钮 */
-.btn-wrap{
-    text-align:center;
-    margin:60px;
-}
-
 .btn{
-    padding:14px 40px;
-    border-radius:12px;
+    display:block;
+    width:220px;
+    margin:40px auto;
+    padding:15px;
+    text-align:center;
+    border-radius:30px;
     background:linear-gradient(135deg,#3b82f6,#22d3ee);
     color:white;
     text-decoration:none;
     font-size:18px;
-    box-shadow:0 0 20px rgba(34,211,238,0.5);
-    transition:0.3s;
 }
 
-.btn:hover{
-    transform:scale(1.1);
-}
-
-/* 页脚 */
 footer{
     text-align:center;
-    padding:30px;
+    margin:30px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 左边装饰 -->
-<div class="side left">
-<h3>⚔ 百业齐聚</h3>
-<p>多元活动 · 永不停歇</p>
-<p>兄弟集结 · 共闯江湖</p>
-<p>沧渊为王 · 唯我独尊</p>
+<div class="left-title">沧渊阁</div>
+
+<div class="left-box">
+<div>⚔ 百业齐聚</div>
+<div>👥 兄弟集结</div>
+<div>👑 沧渊为王</div>
 </div>
 
-<!-- 右边装饰 -->
-<div class="side right">
-<h3>江湖宣言</h3>
-<p>兄弟集结 · 共闯江湖</p>
-<p>永不独行 · 沧渊为王</p>
+<div class="right-text">
+兄弟集结 共闯江湖 永不独行 沧渊为王
 </div>
 
 <section class="hero">
 <h1>沧渊阁</h1>
 <p>ID: 10260103</p>
-
 <div id="countdown">加载中...</div>
 </section>
 
-<h2 style="text-align:center;">百業活動時間表</h2>
-
 <div class="timeline">
+
+<div class="line"></div>
 
 <div class="item" data-start="23:00" data-end="23:59" data-days="all">
 <div class="time">每日 23:00</div>
-<div class="content">🎉 百業派對</div>
+<div class="dot"></div>
+<div class="content">
+<span>🎉 百業派對</span>
+<span>23:00-23:59</span>
+</div>
 </div>
 
 <div class="item" data-start="21:30" data-end="23:00" data-days="1,3,5">
 <div class="time">一 / 三 / 五</div>
-<div class="content">⚔ 百業副本</div>
+<div class="dot"></div>
+<div class="content">
+<span>⚔ 百業副本</span>
+<span>21:30-23:00</span>
+</div>
 </div>
 
 <div class="item" data-start="22:00" data-end="23:00" data-days="6,0">
 <div class="time">周末</div>
-<div class="content">🔥 百葉戰爭</div>
+<div class="dot"></div>
+<div class="content">
+<span>🔥 百葉戰爭</span>
+<span>22:00-23:00</span>
+</div>
 </div>
 
-<div class="item" data-start="21:00" data-end="22:00" data-days="2,4">
+<div class="item active" data-start="21:00" data-end="22:00" data-days="2,4">
 <div class="time">周二 / 周四</div>
-<div class="content">🏆 一決高下</div>
+<div class="dot"></div>
+<div class="content">
+<span>🏆 一決高下</span>
+<span>21:00-22:00</span>
+</div>
+<div class="now">进行中 >></div>
 </div>
 
 <div class="item" data-start="22:00" data-end="23:00" data-days="2,4">
 <div class="time">周二 / 周四</div>
-<div class="content">⚡ 破軍殺將</div>
+<div class="dot"></div>
+<div class="content">
+<span>⚡ 破軍殺將</span>
+<span>22:00-23:00</span>
+</div>
 </div>
 
 </div>
 
-<div class="btn-wrap">
 <a href="https://discord.gg/cangyuancrew" target="_blank" class="btn">
 🚀 加入 Discord
 </a>
-</div>
 
 <footer>
 © 2026 沧渊阁 · Probieee
 </footer>
 
 <script>
-function parseTime(t){
-    const [h,m]=t.split(":").map(Number);
-    return h*60+m;
-}
-
-function validDay(days){
-    const d=new Date().getDay();
-    if(days==="all") return true;
-    return days.split(",").map(Number).includes(d);
-}
+function pad(n){return n.toString().padStart(2,"0");}
 
 function update(){
     const now=new Date();
-    const cur=now.getHours()*60+now.getMinutes();
-
-    let next=null;
-    let min=9999;
-
-    document.querySelectorAll(".item").forEach(el=>{
-        const s=parseTime(el.dataset.start);
-        const e=parseTime(el.dataset.end);
-
-        el.classList.remove("active");
-
-        if(validDay(el.dataset.days) && cur>=s && cur<=e){
-            el.classList.add("active");
-        }
-
-        let diff=s-cur;
-        if(diff<0) diff+=1440;
-
-        if(diff<min){
-            min=diff;
-            next=el;
-        }
-    });
-
-    const name=next.querySelector(".content").innerText;
-    const sec=min*60;
-    const h=Math.floor(sec/3600);
-    const m=Math.floor((sec%3600)/60);
-    const s=Math.floor(sec%60);
+    const h=pad(now.getHours());
+    const m=pad(now.getMinutes());
+    const s=pad(now.getSeconds());
 
     document.getElementById("countdown").innerText=
-    "下一场："+name+"（"+h+":"+m+":"+s+"）";
+    "当前时间："+h+":"+m+":"+s;
 }
-
 setInterval(update,1000);
 update();
 </script>
