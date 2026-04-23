@@ -28,7 +28,7 @@ body::before{
     z-index:-3;
 }
 
-/* ✨ 粒子层 */
+/* ✨ 粒子 */
 canvas{
     position:fixed;
     top:0;
@@ -36,42 +36,16 @@ canvas{
     z-index:-2;
 }
 
-/* 🐉 中央淡LOGO（解决空） */
-.hero::after{
-    content:'';
-    position:absolute;
-    width:700px;
-    height:700px;
-    background:url('logo.png') center/contain no-repeat;
-    opacity:0.06;
-    filter:blur(3px);
-}
-
-/* 💡 光圈 */
-.hero::before{
-    content:'';
-    position:absolute;
-    width:500px;
-    height:500px;
-    border-radius:50%;
-    background:radial-gradient(circle,#22d3ee33,transparent);
-    filter:blur(50px);
-}
-
-/* 首页 */
+/* 首页（已修空白问题） */
 .hero{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
+    padding:120px 20px 40px;
     text-align:center;
     position:relative;
 }
 
 /* 标题 */
 h1{
-    font-size:80px;
+    font-size:70px;
     background:linear-gradient(90deg,#60a5fa,#22d3ee);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
@@ -81,24 +55,36 @@ h1{
     color:#94a3b8;
 }
 
-/* 标语 */
 .slogan{
     margin-top:10px;
     color:#cbd5f5;
-    letter-spacing:2px;
 }
 
 /* 倒计时 */
 #countdown{
-    margin-top:15px;
-    font-size:22px;
+    margin-top:10px;
+    font-size:20px;
     color:#38bdf8;
+}
+
+/* 分隔线 */
+.divider{
+    width:200px;
+    height:2px;
+    background:linear-gradient(90deg,transparent,#22d3ee,transparent);
+    margin:20px auto;
+}
+
+/* 标题 */
+h2{
+    text-align:center;
+    margin-top:30px;
 }
 
 /* 时间轴 */
 .timeline{
     max-width:900px;
-    margin:60px auto;
+    margin:20px auto 60px;
     position:relative;
 }
 
@@ -111,10 +97,20 @@ h1{
     background:#22d3ee;
 }
 
+/* 项目 */
 .item{
     display:flex;
     justify-content:space-between;
     margin:40px 0;
+
+    opacity:0;
+    transform:translateY(50px);
+    transition:all 0.6s ease;
+}
+
+.item.show{
+    opacity:1;
+    transform:translateY(0);
 }
 
 .time{
@@ -161,37 +157,38 @@ footer{
 <section class="hero">
 <h1>沧渊阁</h1>
 <p>ID: 10260103</p>
-
 <p class="slogan">江湖未定 · 沧渊为王</p>
 
 <div id="countdown">加载中...</div>
+
+<div class="divider"></div>
 </section>
 
-<h2 style="text-align:center;">百業活動時間表</h2>
+<h2>百業活動時間表</h2>
 
 <div class="timeline">
 
-<div class="item" data-start="23:00" data-end="23:59" data-days="all" data-name="百業派對">
+<div class="item" data-start="23:00" data-end="23:59" data-days="all">
 <div class="time">每日 23:00</div>
 <div class="content">🎉 百業派對</div>
 </div>
 
-<div class="item" data-start="21:30" data-end="23:00" data-days="1,3,5" data-name="副本">
+<div class="item" data-start="21:30" data-end="23:00" data-days="1,3,5">
 <div class="time">一 / 三 / 五</div>
 <div class="content">⚔ 百業副本</div>
 </div>
 
-<div class="item" data-start="22:00" data-end="23:00" data-days="6,0" data-name="百葉戰爭">
+<div class="item" data-start="22:00" data-end="23:00" data-days="6,0">
 <div class="time">周末</div>
 <div class="content">🔥 百葉戰爭</div>
 </div>
 
-<div class="item" data-start="21:00" data-end="22:00" data-days="2,4" data-name="一決高下">
+<div class="item" data-start="21:00" data-end="22:00" data-days="2,4">
 <div class="time">周二 / 周四</div>
 <div class="content">🏆 一決高下</div>
 </div>
 
-<div class="item" data-start="22:00" data-end="23:00" data-days="2,4" data-name="破軍殺將">
+<div class="item" data-start="22:00" data-end="23:00" data-days="2,4">
 <div class="time">周二 / 周四</div>
 <div class="content">⚡ 破軍殺將</div>
 </div>
@@ -207,53 +204,49 @@ footer{
 </footer>
 
 <script>
-// 粒子效果
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
+// ✨ 粒子
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;
+canvas.height=innerHeight;
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for(let i=0;i<80;i++){
-    particles.push({
-        x:Math.random()*canvas.width,
-        y:Math.random()*canvas.height,
-        r:Math.random()*2,
-        d:Math.random()*1
-    });
+let p=[];
+for(let i=0;i<60;i++){
+p.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2});
 }
 
 function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle="rgba(34,211,238,0.6)";
-    particles.forEach(p=>{
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fill();
-    });
-    update();
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="rgba(34,211,238,0.6)";
+p.forEach(o=>{
+ctx.beginPath();
+ctx.arc(o.x,o.y,o.r,0,Math.PI*2);
+ctx.fill();
+o.y+=0.3;
+if(o.y>canvas.height)o.y=0;
+});
 }
-
-function update(){
-    particles.forEach(p=>{
-        p.y += p.d;
-        if(p.y>canvas.height){
-            p.y=0;
-            p.x=Math.random()*canvas.width;
-        }
-    });
-}
-
 setInterval(draw,30);
 
-// 倒计时（简化版）
-function updateCountdown(){
-    document.getElementById("countdown").innerText="系统运行中...";
+// ⏳ 倒计时（简单）
+setInterval(()=>{
+document.getElementById("countdown").innerText="系统运行中...";
+},1000);
+
+// 🎮 滚动动画
+const items=document.querySelectorAll(".item");
+
+function reveal(){
+items.forEach(item=>{
+const rect=item.getBoundingClientRect();
+if(rect.top<window.innerHeight-100){
+item.classList.add("show");
 }
-setInterval(updateCountdown,1000);
-updateCountdown();
+});
+}
+
+window.addEventListener("scroll",reveal);
+reveal();
 </script>
 
 </body>
