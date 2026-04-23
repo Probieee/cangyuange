@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>沧渊阁 · 百业网</title>
 
+<!-- 字体 -->
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+
 <style>
 *{
     margin:0;
@@ -18,7 +21,7 @@ body{
     overflow-x:hidden;
 }
 
-/* ✅ 背景（统一用 bg.jpg） */
+/* 背景 */
 body::before{
     content:"";
     position:fixed;
@@ -29,7 +32,7 @@ body::before{
 
     background:
     linear-gradient(rgba(2,6,23,0.75), rgba(2,6,23,0.95)),
-    url("bg.jpg");
+    url("logo.png");
 
     background-size:cover;
     background-position:center;
@@ -38,126 +41,114 @@ body::before{
     z-index:-1;
 }
 
-/* 标题字体 */
-h1{
-    font-family: 'Ma Shan Zheng', cursive;
-    font-size:80px;
-    color:#38bdf8;
-    text-shadow:
-        0 0 10px #22d3ee,
-        0 0 30px #22d3ee,
-        0 0 60px #0ea5e9;
-}
-
-/* 左侧标题 */
-.left-title{
-    position:fixed;
-    left:40px;
-    top:50%;
-    transform:translateY(-50%);
-    writing-mode:vertical-rl;
-    font-size:40px;
-    color:#38bdf8;
-    opacity:0.6;
-}
-
-/* 左侧内容 */
-.left-box{
-    position:fixed;
-    left:40px;
-    bottom:60px;
-    font-size:14px;
-    color:#7dd3fc;
-    line-height:28px;
-}
-
-/* 右侧文字 */
-.right-text{
-    position:fixed;
-    right:40px;
-    top:50%;
-    transform:translateY(-50%);
-    writing-mode:vertical-rl;
-    font-size:14px;
-    color:#7dd3fc;
-    line-height:28px;
-}
-
 /* 主体 */
 .hero{
     text-align:center;
     padding-top:80px;
 }
 
+/* 标题（降低亮度版） */
+h1{
+    font-family:'Ma Shan Zheng',cursive;
+    font-size:90px;
+    color:#7dd3fc;
+
+    text-shadow:
+        0 0 6px #22d3ee,
+        0 0 12px rgba(34,211,238,0.5);
+}
+
+/* ID */
+.hero p{
+    color:#cbd5f5;
+    margin-top:10px;
+    font-size:20px;
+}
+
 /* 倒计时 */
 #countdown{
-    margin-top:10px;
+    margin-top:20px;
+    font-size:24px;
     color:#38bdf8;
-    font-size:18px;
 }
 
-/* 时间表 */
+/* 标题 */
+.section-title{
+    margin-top:40px;
+    font-size:30px;
+    color:#e2e8f0;
+}
+
+/* 卡片 */
 .timeline{
-    margin:40px auto;
-    width:600px;
-    background:rgba(255,255,255,0.03);
+    width:850px;
+    margin:30px auto;
+    padding:25px;
     border-radius:20px;
-    padding:20px;
-    backdrop-filter:blur(10px);
+    background:rgba(255,255,255,0.04);
+    backdrop-filter:blur(12px);
 }
 
+/* 行 */
 .item{
     display:flex;
     justify-content:space-between;
-    padding:15px 20px;
-    margin:10px 0;
-    border-radius:10px;
-    background:rgba(255,255,255,0.03);
+    align-items:center;
+    padding:18px 25px;
+    margin:12px 0;
+    border-radius:12px;
+    background:rgba(255,255,255,0.05);
+    font-size:20px;
+    transition:0.3s;
 }
 
-/* 当前活动高亮 */
+/* 高亮 */
 .active{
+    background:rgba(34,211,238,0.2);
+    box-shadow:0 0 25px #22d3ee;
     transform:scale(1.05);
-    background:rgba(56,189,248,0.2);
-    box-shadow:0 0 20px #38bdf8;
 }
 
-/* 按钮 */
+/* 左右 */
+.left{color:#38bdf8;}
+.right{color:#e2e8f0;}
+
+/* Discord按钮 */
 .btn{
-    display:inline-block;
-    margin-top:30px;
-    padding:15px 40px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin-top:40px;
+    padding:16px 45px;
     border-radius:30px;
-    background:linear-gradient(90deg,#3b82f6,#22d3ee);
+    background:linear-gradient(90deg,#5865F2,#22d3ee);
     color:white;
     text-decoration:none;
+    font-size:20px;
+    transition:0.3s;
 }
 
-/* 底部 */
+.btn:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 25px #22d3ee;
+}
+
+/* Discord图标 */
+.btn img{
+    width:24px;
+}
+
+/* 页脚 */
 footer{
+    margin-top:40px;
     text-align:center;
-    margin:40px 0;
     color:#94a3b8;
+    font-size:16px;
 }
 </style>
-
-<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
-<div class="left-title">沧渊阁</div>
-
-<div class="left-box">
-⚔ 百业齐聚<br>
-👥 兄弟集结<br>
-👑 沧渊为王
-</div>
-
-<div class="right-text">
-兄弟集结 共闯江湖<br>
-永不独行 沧渊为王
-</div>
 
 <section class="hero">
 <h1>沧渊阁</h1>
@@ -165,18 +156,40 @@ footer{
 
 <div id="countdown">加载中...</div>
 
-<h2 style="margin-top:30px;">百业活动时间表</h2>
+<div class="section-title">百业活动时间表</div>
 
 <div class="timeline">
-<div class="item">🎉 百业派对 <span>23:00</span></div>
-<div class="item">⚔ 百业副本 <span>21:30</span></div>
-<div class="item">🔥 百业战争 <span>22:00</span></div>
-<div class="item active">🏆 一决高下 <span>21:00</span></div>
-<div class="item">⚡ 破军杀将 <span>22:00</span></div>
+
+<div class="item">
+<div class="left">🎉 百業派對</div>
+<div class="right">每日 23:00</div>
+</div>
+
+<div class="item">
+<div class="left">⚔ 百業/俠境副本</div>
+<div class="right">周一/三/五 21:00 - 21:30</div>
+</div>
+
+<div class="item">
+<div class="left">🔥 百葉戰爭</div>
+<div class="right">周末 22:00 - 23:00<br>（联赛 周六 20:30）</div>
+</div>
+
+<div class="item active">
+<div class="left">🏆 一決高下</div>
+<div class="right">周二/周四 21:00 - 22:00</div>
+</div>
+
+<div class="item">
+<div class="left">⚡ 破軍殺將</div>
+<div class="right">周二/周四 22:00 - 23:00</div>
+</div>
+
 </div>
 
 <a href="https://discord.gg/cangyuancrew" target="_blank" class="btn">
-🚀 加入 Discord
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
+加入 Discord
 </a>
 
 <footer>
@@ -188,39 +201,42 @@ footer{
 <script>
 function getNextEvent(){
     const now = new Date();
-    const currentMinutes = now.getHours()*60 + now.getMinutes();
+    const day = now.getDay();
+    const time = now.getHours()*60 + now.getMinutes();
 
     const events = [
-        {name:"百业派对", start:23*60},
-        {name:"百业副本", start:21*60+30},
-        {name:"百业战争", start:22*60},
-        {name:"一决高下", start:21*60},
-        {name:"破军杀将", start:22*60}
+        {name:"百業派對", days:[0,1,2,3,4,5,6], start:1380},
+        {name:"副本", days:[1,3,5], start:1260},
+        {name:"百葉戰爭", days:[0,6], start:1320},
+        {name:"一決高下", days:[2,4], start:1260},
+        {name:"破軍殺將", days:[2,4], start:1320}
     ];
 
-    let next = null;
-    let diff = 9999;
+    let next=null, min=9999;
 
     events.forEach(e=>{
-        let d = e.start - currentMinutes;
-        if(d<0) d += 1440;
+        e.days.forEach(d=>{
+            let diffDay=(d-day+7)%7;
+            let diff=diffDay*1440 + e.start - time;
+            if(diff<0) diff+=1440;
 
-        if(d < diff){
-            diff = d;
-            next = e.name;
-        }
+            if(diff<min){
+                min=diff;
+                next=e.name;
+            }
+        });
     });
 
-    return {name:next, minutes:diff};
+    return {name:next, minutes:min};
 }
 
 function update(){
-    const data = getNextEvent();
-    const h = Math.floor(data.minutes/60);
-    const m = data.minutes%60;
+    const d=getNextEvent();
+    const h=Math.floor(d.minutes/60);
+    const m=d.minutes%60;
 
     document.getElementById("countdown").innerText =
-    "下一场：" + data.name + "（"+h+"小时 "+m+"分钟）";
+    "下一场："+d.name+"（"+h+"小时 "+m+"分钟）";
 }
 
 setInterval(update,1000);
