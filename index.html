@@ -21,7 +21,7 @@ body::before{
     width:100%;
     height:100%;
     background:
-    linear-gradient(rgba(2,6,23,0.85),rgba(2,6,23,0.95)),
+    linear-gradient(rgba(2,6,23,0.8),rgba(2,6,23,0.95)),
     url('logo.png');
     background-size:cover;
     background-position:center;
@@ -31,28 +31,21 @@ body::before{
 /* ✨ 粒子 */
 canvas{
     position:fixed;
-    top:0;
-    left:0;
     z-index:-2;
 }
 
-/* 首页（已修空白问题） */
+/* 首页 */
 .hero{
     padding:120px 20px 40px;
     text-align:center;
-    position:relative;
 }
 
 /* 标题 */
 h1{
-    font-size:70px;
+    font-size:72px;
     background:linear-gradient(90deg,#60a5fa,#22d3ee);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
-}
-
-.hero p{
-    color:#94a3b8;
 }
 
 .slogan{
@@ -62,23 +55,17 @@ h1{
 
 /* 倒计时 */
 #countdown{
-    margin-top:10px;
+    margin-top:15px;
     font-size:20px;
     color:#38bdf8;
 }
 
-/* 分隔线 */
+/* 分隔 */
 .divider{
     width:200px;
     height:2px;
     background:linear-gradient(90deg,transparent,#22d3ee,transparent);
     margin:20px auto;
-}
-
-/* 标题 */
-h2{
-    text-align:center;
-    margin-top:30px;
 }
 
 /* 时间轴 */
@@ -97,15 +84,13 @@ h2{
     background:#22d3ee;
 }
 
-/* 项目 */
 .item{
     display:flex;
     justify-content:space-between;
     margin:40px 0;
-
     opacity:0;
-    transform:translateY(50px);
-    transition:all 0.6s ease;
+    transform:translateY(40px);
+    transition:0.6s;
 }
 
 .item.show{
@@ -124,6 +109,7 @@ h2{
     padding:20px;
     background:rgba(15,23,42,0.7);
     border-radius:10px;
+    position:relative;
 }
 
 /* 当前活动 */
@@ -132,15 +118,33 @@ h2{
     box-shadow:0 0 25px #22d3ee;
 }
 
+/* 🔥 进行中标签 */
+.tag{
+    position:absolute;
+    top:-10px;
+    right:-10px;
+    background:#22d3ee;
+    color:#000;
+    padding:5px 10px;
+    font-size:12px;
+    border-radius:5px;
+}
+
 /* 按钮 */
 .btn{
     display:block;
     margin:60px auto;
     padding:15px 40px;
-    background:#22d3ee;
+    background:linear-gradient(135deg,#3b82f6,#22d3ee);
     color:white;
     text-decoration:none;
-    width:max-content;
+    border-radius:8px;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 20px #22d3ee;
 }
 
 footer{
@@ -158,37 +162,35 @@ footer{
 <h1>沧渊阁</h1>
 <p>ID: 10260103</p>
 <p class="slogan">江湖未定 · 沧渊为王</p>
-
 <div id="countdown">加载中...</div>
-
 <div class="divider"></div>
 </section>
 
-<h2>百業活動時間表</h2>
+<h2 style="text-align:center;">百業活動時間表</h2>
 
 <div class="timeline">
 
-<div class="item" data-start="23:00" data-end="23:59" data-days="all">
+<div class="item" data-start="23:00" data-end="23:59" data-days="all" data-name="百業派對">
 <div class="time">每日 23:00</div>
 <div class="content">🎉 百業派對</div>
 </div>
 
-<div class="item" data-start="21:30" data-end="23:00" data-days="1,3,5">
+<div class="item" data-start="21:30" data-end="23:00" data-days="1,3,5" data-name="副本">
 <div class="time">一 / 三 / 五</div>
 <div class="content">⚔ 百業副本</div>
 </div>
 
-<div class="item" data-start="22:00" data-end="23:00" data-days="6,0">
+<div class="item" data-start="22:00" data-end="23:00" data-days="6,0" data-name="百葉戰爭">
 <div class="time">周末</div>
 <div class="content">🔥 百葉戰爭</div>
 </div>
 
-<div class="item" data-start="21:00" data-end="22:00" data-days="2,4">
+<div class="item" data-start="21:00" data-end="22:00" data-days="2,4" data-name="一決高下">
 <div class="time">周二 / 周四</div>
 <div class="content">🏆 一決高下</div>
 </div>
 
-<div class="item" data-start="22:00" data-end="23:00" data-days="2,4">
+<div class="item" data-start="22:00" data-end="23:00" data-days="2,4" data-name="破軍殺將">
 <div class="time">周二 / 周四</div>
 <div class="content">⚡ 破軍殺將</div>
 </div>
@@ -196,7 +198,7 @@ footer{
 </div>
 
 <a href="https://discord.gg/cangyuancrew" target="_blank" class="btn">
-加入 Discord
+🚀 加入 Discord
 </a>
 
 <footer>
@@ -204,49 +206,84 @@ footer{
 </footer>
 
 <script>
-// ✨ 粒子
-const canvas=document.getElementById("particles");
-const ctx=canvas.getContext("2d");
-canvas.width=innerWidth;
-canvas.height=innerHeight;
-
-let p=[];
+// 粒子
+const c=document.getElementById("particles");
+const ctx=c.getContext("2d");
+c.width=innerWidth;c.height=innerHeight;
+let arr=[];
 for(let i=0;i<60;i++){
-p.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2});
+arr.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2});
 }
-
-function draw(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-ctx.fillStyle="rgba(34,211,238,0.6)";
-p.forEach(o=>{
-ctx.beginPath();
-ctx.arc(o.x,o.y,o.r,0,Math.PI*2);
-ctx.fill();
-o.y+=0.3;
-if(o.y>canvas.height)o.y=0;
-});
-}
-setInterval(draw,30);
-
-// ⏳ 倒计时（简单）
 setInterval(()=>{
-document.getElementById("countdown").innerText="系统运行中...";
-},1000);
+ctx.clearRect(0,0,c.width,c.height);
+ctx.fillStyle="#22d3ee";
+arr.forEach(p=>{
+ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.28);ctx.fill();
+p.y+=0.3;if(p.y>c.height)p.y=0;
+});
+},30);
 
-// 🎮 滚动动画
+// 滚动动画
 const items=document.querySelectorAll(".item");
-
 function reveal(){
-items.forEach(item=>{
-const rect=item.getBoundingClientRect();
-if(rect.top<window.innerHeight-100){
-item.classList.add("show");
+items.forEach(i=>{
+if(i.getBoundingClientRect().top<window.innerHeight-100){
+i.classList.add("show");
 }
 });
 }
-
 window.addEventListener("scroll",reveal);
 reveal();
+
+// 当前活动 + 倒计时
+function update(){
+const now=new Date();
+const day=now.getDay();
+const time=now.getHours()*60+now.getMinutes();
+
+let next=null,min=99999;
+
+items.forEach(i=>{
+const ds=i.dataset.days;
+const st=i.dataset.start.split(":").map(Number);
+const et=i.dataset.end.split(":").map(Number);
+
+const s=st[0]*60+st[1];
+const e=et[0]*60+et[1];
+
+let valid=ds==="all"||ds.split(",").includes(String(day));
+
+i.classList.remove("active");
+
+if(valid && time>=s && time<=e){
+i.classList.add("active");
+
+if(!i.querySelector(".tag")){
+let t=document.createElement("div");
+t.className="tag";
+t.innerText="进行中";
+i.querySelector(".content").appendChild(t);
+}
+}
+
+let diff=s-time;
+if(diff<0) diff+=1440;
+
+if(diff<min){
+min=diff;
+next=i.dataset.name;
+}
+});
+
+let h=Math.floor(min/60);
+let m=min%60;
+
+document.getElementById("countdown").innerText=
+"下一场："+next+"（"+h+"小时"+m+"分钟）";
+}
+
+setInterval(update,1000);
+update();
 </script>
 
 </body>
